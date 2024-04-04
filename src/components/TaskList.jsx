@@ -1,9 +1,14 @@
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeTodo } from "../redux/slice";
+import { removeTodo, toggleTodo } from "../redux/slice";
 
 const TaskList = () => {
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
+
+  const handleToggle = (id) => {
+    dispatch(toggleTodo(id));
+  };
 
   return (
     <>
@@ -13,7 +18,21 @@ const TaskList = () => {
             className="mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
             key={todo.id}
           >
-            <div className="text-white">{todo.text}</div>
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={() => handleToggle(todo.id)}
+                className="mr-2 cursor-pointer"
+              />
+              <div
+                className={`text-white ${
+                  todo.completed ? "line-through text-gray-400" : ""
+                }`}
+              >
+                {todo.text}
+              </div>
+            </div>
             <button
               onClick={() => dispatch(removeTodo(todo.id))}
               className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"

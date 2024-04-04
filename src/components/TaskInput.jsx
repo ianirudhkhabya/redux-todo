@@ -20,6 +20,7 @@ const TaskInput = () => {
         placeholder="Enter a Todo..."
         value={input}
         onChange={(e) => setInput(e.target.value)}
+        required
       />
       <button
         type="submit"
