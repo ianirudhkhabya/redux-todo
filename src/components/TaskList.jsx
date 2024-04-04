@@ -5,6 +5,7 @@ const TaskList = () => {
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
 
+  // Function to toggle the todo item
   const handleToggle = (id) => {
     dispatch(toggleTodo(id));
   };
@@ -14,7 +15,7 @@ const TaskList = () => {
       <ul className="list-none">
         {todos.map((todo) => (
           <li
-            className="mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
+            className="flex justify-between items-center bg-zinc-800 mt-4 px-4 py-2 rounded"
             key={todo.id}
           >
             <div className="flex items-center">
@@ -26,7 +27,7 @@ const TaskList = () => {
               />
               <div
                 className={`text-white ${
-                  todo.completed ? "line-through text-gray-400" : ""
+                  todo.completed ? "text-gray-400 line-through" : ""
                 }`}
               >
                 {todo.text}
@@ -34,7 +35,7 @@ const TaskList = () => {
             </div>
             <button
               onClick={() => dispatch(removeTodo(todo.id))}
-              className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
+              className="text-white bg-red-500 hover:bg-red-600 border-0 py-1 px-4 focus:outline-none rounded text-md"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
